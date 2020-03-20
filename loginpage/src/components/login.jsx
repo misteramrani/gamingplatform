@@ -23,17 +23,23 @@ class LoginForm extends React.Component {
         super(props);
 
         this.state = {
-            email: '', password: '', bla: '' };
+            email: '', 
+            password: '', 
+            bla: '',
+            ezel: false
+        };
 
-            this.handleChange = this.handleChange.bind(this);
-            this.handleSubmit = this.handleSubmit.bind(this);
-        this.ezel = '';
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.switchBetweenLoginSignup = this.switchBetweenLoginSignup.bind(this);
+    }
 
-            }
-
-    switchBetweenLoginSignup(){
+    switchBetweenLoginSignup() {
         // is er een manier om return te gebruiken en daarna de render in te krijgen bij een onclickevent?
         // return (<SignupForm />)
+        this.setState({
+            ezel: true
+        })
     }
 
     handleChange(event) {
@@ -99,7 +105,7 @@ class LoginForm extends React.Component {
 
         return (
             <div>
-{this.baqra}
+                {this.baqra}
                 <img src={logo} alt="" />
                 <div className='login_header'>
                     <img className='login_header_icon' src={gamingicon} alt="" />
@@ -112,12 +118,18 @@ class LoginForm extends React.Component {
                     <input className='login_form_button' type="submit" value="LOG IN" />
                 </form>
                 <div className='login_header'>
-                <h1>NOG GEEN MVIDIA-ACOUNT? </h1>
+                    <h1>NOG GEEN MVIDIA-ACOUNT? </h1>
                     {/* <p>Klik dan <a href={'./signup'}><span>hier</span></a> om je te registreren.</p> */}
-                    <p>Klik dan<button onClick={this.switchBetweenLoginSignup()}>hier</button>om je te registreren.</p>
-                    {/* <SignupForm/> */}
-                    <switchBetweenLoginSignup />
-            </div>
+                    <p>Klik dan<button onClick={this.switchBetweenLoginSignup}>hier</button>om je te registreren.</p>
+                    {this.state.ezel ? <SignupForm /> : null }
+
+                    {/* if (this.state.ezel) {
+                            <SignupForm />
+                        } else {
+                            null
+                        }*/}
+                    {/* <switchBetweenLoginSignup /> */}
+                </div>
             </div>
         )
 
