@@ -84,13 +84,11 @@ class SignupForm extends React.Component {
     render() {
 
         return (
-            <div>
-                <h1>rey-giestrir</h1>
-
-                <form onSubmit={this.handleSubmit}>
-                    <div><p>ie-meel:</p> <input type="email" name="email" value={this.state.email} onChange={this.handleChange} /></div>
-                    <div><p>Wagtwort:</p> <input type="password" name="password" value={this.state.password} onChange={this.handleChange} /></div>
-                    <input className='as' type="submit" value="Klik hiero" />
+            <div className='signup_main'>
+                <form className='login_main_form' onSubmit={this.handleSubmit}>
+                    <div><p>E-mailadres:</p> <input className='login_form_field' type="email" name="email" value={this.state.email} onChange={this.handleChange} /></div>
+                    <div><p>Wachtwoord:</p> <input className='login_form_field' type="password" name="password" value={this.state.password} onChange={this.handleChange} /></div>
+                    <input className='login_form_button' type="submit" value="REGISTREER" />
                 </form>
             </div>
         )

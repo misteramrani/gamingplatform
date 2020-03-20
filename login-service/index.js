@@ -31,13 +31,37 @@ app.post('/login', (request, response) => {
 
         } else {
             response.status(403).send({ errorCode: '403' })
-
         }
     });
-
-
 })
 
+app.post('/signup', (request, response) => {
+
+    var email = request.body.email;
+    var password = request.body.password;
+    console.log(request.body.email)
+
+    db.all('INSERT INTO users (email, password) VALUES (?,?);', [request.body.email, request.body.password], (error, results) => {
+        // Als bestaat, dan message: login of probeer ander naam
+        // Als niet bestaat: check RegExp (of in frontend). Als voorwaarden voldaan, dan 
+        // -opslaan naar db
+        // -bericht dat gelukt is (of in frontend)
+        // -refer to inlog (in frontend)
+        if (error) {
+            res.json({
+                status: false,
+                message: 'there are some errors with query'
+            })
+        } else {
+            res.json({
+                status: true,
+                data: results,
+                message: 'user registered sucessfully'
+            })
+        }
+
+    });
+})
 
 
 app.listen(8000, () => console.log(`Listening on port 8000`))

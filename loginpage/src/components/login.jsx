@@ -9,24 +9,14 @@ import SignupForm from './signup'
 
 
 
-// export default () =>  {
-
-//     return ( 
-//         <div>
-//             <h1>hallo</h1>
-//             {/* <Router routes={routes} history={history} /> */}
-//         </div>
-//     )
-// }
 class LoginForm extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            email: '', 
-            password: '', 
-            bla: '',
-            ezel: false
+            email: '',
+            password: '',
+            signupmodulevisible: false
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -35,10 +25,8 @@ class LoginForm extends React.Component {
     }
 
     switchBetweenLoginSignup() {
-        // is er een manier om return te gebruiken en daarna de render in te krijgen bij een onclickevent?
-        // return (<SignupForm />)
         this.setState({
-            ezel: true
+            signupmodulevisible: true
         })
     }
 
@@ -52,7 +40,6 @@ class LoginForm extends React.Component {
         }
         else if (event.target.type === 'password') {
             this.setState({
-
                 password: event.target.value
             });
         }
@@ -76,7 +63,7 @@ class LoginForm extends React.Component {
                     this.props.history.push('/academy');
 
                 } else if (response.status === 403) {
-                    alert('status code = 403')
+                    alert('User/password-combination is incorrect. Try again.')
 
                 }
                 else {
@@ -98,14 +85,10 @@ class LoginForm extends React.Component {
         // alert('A password was submitted that was ' + value.length + ' characters long.');
     }
 
-
-
-
     render() {
-
         return (
+
             <div>
-                {this.baqra}
                 <img src={logo} alt="" />
                 <div className='login_header'>
                     <img className='login_header_icon' src={gamingicon} alt="" />
@@ -121,14 +104,15 @@ class LoginForm extends React.Component {
                     <h1>NOG GEEN MVIDIA-ACOUNT? </h1>
                     {/* <p>Klik dan <a href={'./signup'}><span>hier</span></a> om je te registreren.</p> */}
                     <p>Klik dan<button onClick={this.switchBetweenLoginSignup}>hier</button>om je te registreren.</p>
-                    {this.state.ezel ? <SignupForm /> : null }
+                    {this.state.signupmodulevisible ? <SignupForm /> : null}
 
-                    {/* if (this.state.ezel) {
+                    {/* Regel 113 is hetzelfde als:
+                    
+                    if (this.state.ezel) {
                             <SignupForm />
                         } else {
                             null
                         }*/}
-                    {/* <switchBetweenLoginSignup /> */}
                 </div>
             </div>
         )
@@ -136,36 +120,6 @@ class LoginForm extends React.Component {
     }
 }
 
-// function login() {
-//     return (
-//         <div>
-//             <h1>hallo loch hier inn</h1>
-
-//             <form onSubmit={this.handleSubmit}>
-//                 <div><p>ie-meel:</p> <input type="email" /></div>
-//                 <div><p>Wagtwort:</p> <input type="password" value={this.state.value} onChange={this.handleChange} /></div>
-//                 <input type="submit" value="Klik hiero" />
-//             </form>
-//         </div>
-//     )
-// }
 
 export default LoginForm;
 
-// class Login extends Component {
-
-//     constructor() {
-//         this.state = {
-//             isLive: true
-//         }
-//     }
-
-
-//     render() {
-//         return (
-//             <div>
-//                 <h1>hallo</h1>
-//             </div>
-//         )
-//     }
-// }
