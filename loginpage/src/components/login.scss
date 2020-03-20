@@ -23,10 +23,23 @@ input {
 
 .login_form_button {
   margin-top: 3rem;
+  border: 0;
+  background-color: #76b800;
+  padding: 0.7rem 5rem;
 }
 
-span {
+button {
   color: #76b800;
+  border: 0;
+  font-size: 1.1rem;
+}
+
+button:focus {
+  outline: none;
+}
+
+button:active {
+  color: white;
 }
 
 a {

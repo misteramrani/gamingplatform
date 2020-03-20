@@ -15,7 +15,7 @@ import './login.scss';
 //         </div>
 //     )
 // }
-class PasswordForm extends React.Component {
+class SignupForm extends React.Component {
     constructor(props) {
         super(props);
 
@@ -98,7 +98,7 @@ class PasswordForm extends React.Component {
     }
 }
 
-export default PasswordForm;
+export default SignupForm;
 
 // class Login extends Component {
 

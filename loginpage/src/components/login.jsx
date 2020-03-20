@@ -4,7 +4,8 @@
 import React from 'react';
 import './login.scss';
 import logo from '../mvidia_logo.jpg';
-import gamingicon from '../icon-game-library.svg'
+import gamingicon from '../icon-game-library.svg';
+import SignupForm from './signup'
 
 
 
@@ -17,14 +18,22 @@ import gamingicon from '../icon-game-library.svg'
 //         </div>
 //     )
 // }
-class PasswordForm extends React.Component {
+class LoginForm extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = { email: '', password: '' };
+        this.state = {
+            email: '', password: '', bla: '' };
 
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+            this.handleChange = this.handleChange.bind(this);
+            this.handleSubmit = this.handleSubmit.bind(this);
+        this.ezel = '';
+
+            }
+
+    switchBetweenLoginSignup(){
+        // is er een manier om return te gebruiken en daarna de render in te krijgen bij een onclickevent?
+        // return (<SignupForm />)
     }
 
     handleChange(event) {
@@ -83,10 +92,14 @@ class PasswordForm extends React.Component {
         // alert('A password was submitted that was ' + value.length + ' characters long.');
     }
 
+
+
+
     render() {
 
         return (
             <div>
+{this.baqra}
                 <img src={logo} alt="" />
                 <div className='login_header'>
                     <img className='login_header_icon' src={gamingicon} alt="" />
@@ -96,11 +109,14 @@ class PasswordForm extends React.Component {
                 <form className='login_main_form' onSubmit={this.handleSubmit}>
                     <div><p>E-mailadres:</p> <input className='login_form_field' type="email" name="email" value={this.state.email} onChange={this.handleChange} /></div>
                     <div><p>Wachtwoord:</p> <input className='login_form_field' type="password" name="password" value={this.state.password} onChange={this.handleChange} /></div>
-                    <input className='login_form_button' type="submit" value="Klik hiero" />
+                    <input className='login_form_button' type="submit" value="LOG IN" />
                 </form>
                 <div className='login_header'>
                 <h1>NOG GEEN MVIDIA-ACOUNT? </h1>
-                    <p>Klik dan <a href={'./signup'}><span>hier</span></a> om je te registreren.</p>
+                    {/* <p>Klik dan <a href={'./signup'}><span>hier</span></a> om je te registreren.</p> */}
+                    <p>Klik dan<button onClick={this.switchBetweenLoginSignup()}>hier</button>om je te registreren.</p>
+                    {/* <SignupForm/> */}
+                    <switchBetweenLoginSignup />
             </div>
             </div>
         )
@@ -122,7 +138,7 @@ class PasswordForm extends React.Component {
 //     )
 // }
 
-export default PasswordForm;
+export default LoginForm;
 
 // class Login extends Component {
 
