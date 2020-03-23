@@ -68,11 +68,13 @@ a {
 }
 
 .hidden,
-.hiddenSignupSuccessful {
+.hiddenSignupSuccessful,
+.hiddenpassworderrormessage {
   visibility: hidden;
 }
 
 .errormessage,
-.signupSuccessful {
+.signupSuccessful,
+.passworderrormessage {
   color: red;
 }

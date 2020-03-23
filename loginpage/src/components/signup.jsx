@@ -11,6 +11,7 @@ class SignupForm extends React.Component {
             password: '',
             showError: true,
             signupSuccessful: true,
+            showPasswordError: true
 
         };
 
@@ -43,7 +44,7 @@ class SignupForm extends React.Component {
         if (!isPassOk) {
             console.log(value)
 
-            return alert('Try Again');
+            return this.showPasswordError();
 
         }
 
@@ -79,6 +80,12 @@ class SignupForm extends React.Component {
         })
     }
 
+    showPasswordError() {
+        this.setState({
+            showPasswordError: false
+        })
+    }
+
     render() {
 
         return (
@@ -86,6 +93,8 @@ class SignupForm extends React.Component {
 
                 <h3 className={this.state.signupSuccessful ? 'hiddenSignupSuccessful' : 'signupSuccessful'}>Registratie is gelukt! Je kunt nu inloggen.</h3>
                 <h3 className={this.state.showError ? 'hidden' : 'errormessage'}>User already exists. Please try again.</h3>
+                <h3 className={this.state.showPasswordError ? 'hiddenpassworderrormessage' : 'passworderrormessage'}>Your password is too weak. Please try again.</h3>
+
 
                 <form className='login_main_form' onSubmit={this.handleSubmit}>
                     <div><p>E-mailadres:</p> <input className='login_form_field' type="email" name="email" value={this.state.email} onChange={this.handleChange} /></div>
