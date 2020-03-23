@@ -66,3 +66,13 @@ a {
   text-align: center;
   margin: auto;
 }
+
+.hidden,
+.hiddenSignupSuccessful {
+  visibility: hidden;
+}
+
+.errormessage,
+.signupSuccessful {
+  color: red;
+}

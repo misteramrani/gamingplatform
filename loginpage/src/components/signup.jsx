@@ -1,32 +1,25 @@
-/* eslint-disable no-useless-escape */
-// import { Router, hashHistory as history } from 'react-router';
-// // Your routes.js file
 import React from 'react';
 import './login.scss';
 
 
-
-// export default () =>  {
-
-//     return ( 
-//         <div>
-//             <h1>hallo</h1>
-//             {/* <Router routes={routes} history={history} /> */}
-//         </div>
-//     )
-// }
 class SignupForm extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = { email: '', password: '' };
+        this.state = {
+            email: '',
+            password: '',
+            showError: true,
+            signupSuccessful: true,
+
+        };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(event) {
-        console.log(event.target.type)
+        // console.log(event.target.type)
         if (event.target.type === 'email') {
             this.setState({
                 email: event.target.value
@@ -34,8 +27,8 @@ class SignupForm extends React.Component {
             );
         }
         else if (event.target.type === 'password') {
-            this.setState({
 
+            this.setState({
                 password: event.target.value
             });
         }
@@ -43,9 +36,18 @@ class SignupForm extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        console.log(this.state.email)
 
-        fetch("http://localhost:8000/login",
+        const value = this.state.password;
+        const checkPassword = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+        const isPassOk = checkPassword.test(value);
+        if (!isPassOk) {
+            console.log(value)
+
+            return alert('Try Again');
+
+        }
+
+        fetch("http://localhost:8000/signup",
             {
                 method: "POST",
                 headers: {
@@ -54,42 +56,43 @@ class SignupForm extends React.Component {
                 },
                 body: JSON.stringify({ email: this.state.email, password: this.state.password })
             })
-            .then(response => {
-                if (response.status === 200) {
-                    this.props.history.push('/academy');
+            .then(res => {
+                if (res.status === 200) {
+                    this.signupSuccessful();
+                    setTimeout(() => window.location.reload(), 2000);
 
-                } else if (response.status === 403) {
-                    alert('status code = 403')
-
-                }
-                else {
-                    alert(response.status)
+                } else if (res.status === 400) {
+                    this.showError()
                 }
             })
+    }
 
-        // const { value } = this.state;
+    showError() {
+        this.setState({
+            showError: false
+        })
+    }
 
-        // const re = new RegExp("(?=.*[0-9])");
-        // const isOk = re.test(value);
-
-        // console.log(isOk);
-
-        // if (!isOk) {
-        //     return alert('je paswoort is zwakjes');
-        // }
-
-        // alert('A password was submitted that was ' + value.length + ' characters long.');
+    signupSuccessful() {
+        this.setState({
+            signupSuccessful: false
+        })
     }
 
     render() {
 
         return (
             <div className='signup_main'>
+
+                <h3 className={this.state.signupSuccessful ? 'hiddenSignupSuccessful' : 'signupSuccessful'}>Registratie is gelukt! Je kunt nu inloggen.</h3>
+                <h3 className={this.state.showError ? 'hidden' : 'errormessage'}>User already exists. Please try again.</h3>
+
                 <form className='login_main_form' onSubmit={this.handleSubmit}>
                     <div><p>E-mailadres:</p> <input className='login_form_field' type="email" name="email" value={this.state.email} onChange={this.handleChange} /></div>
                     <div><p>Wachtwoord:</p> <input className='login_form_field' type="password" name="password" value={this.state.password} onChange={this.handleChange} /></div>
                     <input className='login_form_button' type="submit" value="REGISTREER" />
                 </form>
+
             </div>
         )
 
@@ -98,20 +101,3 @@ class SignupForm extends React.Component {
 
 export default SignupForm;
 
-// class Login extends Component {
-
-//     constructor() {
-//         this.state = {
-//             isLive: true
-//         }
-//     }
-
-
-//     render() {
-//         return (
-//             <div>
-//                 <h1>hallo</h1>
-//             </div>
-//         )
-//     }
-// }

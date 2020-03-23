@@ -1,6 +1,4 @@
-/* eslint-disable no-useless-escape */
-// import { Router, hashHistory as history } from 'react-router';
-// // Your routes.js file
+
 import React from 'react';
 import './login.scss';
 import logo from '../mvidia_logo.jpg';
@@ -16,7 +14,8 @@ class LoginForm extends React.Component {
         this.state = {
             email: '',
             password: '',
-            signupmodulevisible: false
+            signupmodulevisible: false,
+            showError: true
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -63,32 +62,22 @@ class LoginForm extends React.Component {
                     this.props.history.push('/academy');
 
                 } else if (response.status === 403) {
-                    alert('User/password-combination is incorrect. Try again.')
-
-                }
-                else {
-                    alert(response.status)
+                    this.showError()
                 }
             })
+    }
 
-        // const { value } = this.state;
-
-        // const re = new RegExp("(?=.*[0-9])");
-        // const isOk = re.test(value);
-
-        // console.log(isOk);
-
-        // if (!isOk) {
-        //     return alert('je paswoort is zwakjes');
-        // }
-
-        // alert('A password was submitted that was ' + value.length + ' characters long.');
+    showError() {
+        this.setState({
+            showError: false
+        })
     }
 
     render() {
         return (
 
             <div>
+
                 <img src={logo} alt="" />
                 <div className='login_header'>
                     <img className='login_header_icon' src={gamingicon} alt="" />
@@ -100,20 +89,13 @@ class LoginForm extends React.Component {
                     <div><p>Wachtwoord:</p> <input className='login_form_field' type="password" name="password" value={this.state.password} onChange={this.handleChange} /></div>
                     <input className='login_form_button' type="submit" value="LOG IN" />
                 </form>
+                <h3 className={this.state.showError ? 'hidden' : 'errormessage'}>User/password-combination is incorrect. Please try again.</h3>
                 <div className='login_header'>
                     <h1>NOG GEEN MVIDIA-ACOUNT? </h1>
-                    {/* <p>Klik dan <a href={'./signup'}><span>hier</span></a> om je te registreren.</p> */}
                     <p>Klik dan<button onClick={this.switchBetweenLoginSignup}>hier</button>om je te registreren.</p>
                     {this.state.signupmodulevisible ? <SignupForm /> : null}
-
-                    {/* Regel 113 is hetzelfde als:
-                    
-                    if (this.state.ezel) {
-                            <SignupForm />
-                        } else {
-                            null
-                        }*/}
                 </div>
+
             </div>
         )
 

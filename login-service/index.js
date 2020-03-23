@@ -5,7 +5,6 @@ const db = new sqlite3.Database('../Database/users.db')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 
-// app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.json())
 app.use(cors())
 
@@ -15,20 +14,14 @@ app.get('/', function (req, res) {
 
 })
 
-
 app.post('/login', (request, response) => {
-
-    // response.setHeader('Access-Control-Allow-Origin', '*');
 
     var email = request.body.email;
     var password = request.body.password;
-    console.log(request.body.email)
 
-    db.all('SELECT * FROM users WHERE email = ? AND password = ?', [request.body.email, request.body.password], (error, results) => {
+    db.all('SELECT * FROM users WHERE email = ? AND password = ?', [email, password], (error, results) => {
         if (results.length > 0) {
-
             response.status(200).send({ Code: '200' })
-
         } else {
             response.status(403).send({ errorCode: '403' })
         }
@@ -39,25 +32,19 @@ app.post('/signup', (request, response) => {
 
     var email = request.body.email;
     var password = request.body.password;
-    console.log(request.body.email)
+    console.log(password)
 
-    db.all('INSERT INTO users (email, password) VALUES (?,?);', [request.body.email, request.body.password], (error, results) => {
-        // Als bestaat, dan message: login of probeer ander naam
-        // Als niet bestaat: check RegExp (of in frontend). Als voorwaarden voldaan, dan 
-        // -opslaan naar db
-        // -bericht dat gelukt is (of in frontend)
-        // -refer to inlog (in frontend)
+    db.all('INSERT INTO users (email, password) VALUES (?,?);', [email, password], (error, results) => {
+        var doesemailexist = db.all('SELECT * FROM users WHERE email = ($email)');
+
+        console.log(doesemailexist)
         if (error) {
-            res.json({
-                status: false,
-                message: 'there are some errors with query'
-            })
+            response.sendStatus(400)
+            console.log('400')
+
         } else {
-            res.json({
-                status: true,
-                data: results,
-                message: 'user registered sucessfully'
-            })
+            response.sendStatus(200)
+            console.log('200')
         }
 
     });
