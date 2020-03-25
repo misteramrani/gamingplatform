@@ -1,0 +1,80 @@
+@import "../../global-variables.scss";
+
+%titleproperties {
+  text-align: left;
+  margin-left: 2rem;
+  margin-bottom: 0;
+}
+
+.dashboard {
+  display: flex;
+  &_hub {
+    min-width: 300px;
+    max-width: 300px;
+    height: 100vh;
+    background-color: $base-color;
+    &_logowrapper {
+      text-align: right;
+      padding: 3rem 0;
+      &-logo {
+        width: 50%;
+      }
+    }
+    &_profile {
+      &-welcome {
+        @extend %titleproperties;
+      }
+      &-username {
+        text-align: right;
+        margin-right: 3rem;
+        margin-top: 0;
+        font-weight: lighter;
+      }
+    }
+    &_stats {
+      margin-top: 4rem;
+      &-title {
+        @extend %titleproperties;
+      }
+      &_scoreofgame {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 2rem;
+        &-game {
+          margin: 0;
+          font-weight: lighter;
+        }
+        &-score {
+          margin: 0;
+          color: black;
+          font-weight: lighter;
+        }
+      }
+    }
+  }
+  &_main {
+    &_header {
+      &_banner {
+        margin: 2rem 0;
+        &-image {
+          width: 100%;
+        }
+      }
+      &_search {
+        text-align: right;
+        margin: 0 2rem;
+
+        &-searchfield {
+          background: url(../../assets/searchicon.png) no-repeat center left 6px;
+          background-size: 5%;
+          color: blanchedalmond;
+          padding-left: 50px;
+          border: 2px $base-color solid;
+          width: 400px;
+          height: 2rem;
+          outline: none;
+        }
+      }
+    }
+  }
+}

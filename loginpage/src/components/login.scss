@@ -1,4 +1,6 @@
-* {
+@import "../global-variables.scss";
+
+body {
   background-color: rgb(0, 0, 0);
   text-align: center;
 }
@@ -9,27 +11,31 @@ input {
   color: white;
 }
 
-.login_form_field {
-  width: 400px;
-  border-width: 0 0 2px 0;
-}
+.login {
+  &_form {
+    &_field {
+      width: 400px;
+      border-width: 0 0 2px 0;
+    }
 
-.login_form_field:focus {
-  width: 500px;
-  border-width: 0 0 2px 0;
-  border-color: #76b800;
-  outline: none;
-}
+    &_field:focus {
+      width: 500px;
+      border-width: 0 0 2px 0;
+      border-color: $base-color;
+      outline: none;
+    }
 
-.login_form_button {
-  margin-top: 3rem;
-  border: 0;
-  background-color: #76b800;
-  padding: 0.7rem 5rem;
+    &_button {
+      margin-top: 3rem;
+      border: 0;
+      background-color: $base-color;
+      padding: 0.7rem 5rem;
+    }
+  }
 }
 
 button {
-  color: #76b800;
+  color: $base-color;
   border: 0;
   font-size: 1.1rem;
 }
@@ -47,7 +53,7 @@ a {
 }
 
 .login_main_form {
-  border: solid #76b800;
+  border: solid $base-color;
   border-width: 0 20px;
   margin: 2rem 0 4rem 0;
 }
@@ -56,15 +62,14 @@ a {
   border: solid white;
   border-width: 0 20px;
   margin: 2rem 0 4rem 0;
-}
-.login_header_icon {
-  width: 100px;
-}
-
-.login_header_description {
-  width: 70vw;
-  text-align: center;
-  margin: auto;
+  &_icon {
+    width: 100px;
+  }
+  &_description {
+    width: 70vw;
+    text-align: center;
+    margin: auto;
+  }
 }
 
 .hidden,

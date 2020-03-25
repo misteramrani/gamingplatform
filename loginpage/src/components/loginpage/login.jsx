@@ -1,9 +1,9 @@
 
 import React from 'react';
-import './login.scss';
-import logo from '../mvidia_logo.jpg';
-import gamingicon from '../icon-game-library.svg';
-import SignupForm from './signup'
+import '../login.scss';
+import logo from '../../assets/mvidia_logo.jpg';
+import gamingicon from '../../assets/icon-game-library.svg';
+import SignupForm from '../signuppage/signup'
 
 
 
@@ -59,7 +59,7 @@ class LoginForm extends React.Component {
             })
             .then(response => {
                 if (response.status === 200) {
-                    this.props.history.push('/academy');
+                    this.props.history.push('/gamedashboard');
 
                 } else if (response.status === 403) {
                     this.showError()

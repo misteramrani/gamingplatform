@@ -4,9 +4,9 @@ import { Route, BrowserRouter as Router } from 'react-router-dom';
 /**
  * Import all page components here
  */
-import LoginPage from './components/login';
-import AcademyPage from './components/academy';
-import SignupPage from './components/signup';
+import LoginPage from './components/loginpage/login';
+import gameDashboard from './components/gamedashboard/gamedashboard';
+import SignupPage from './components/signuppage/signup';
 
 /**
  * All routes go here.
@@ -18,7 +18,7 @@ export default (
         <Route exact path="/" component={LoginPage} />
         <Route path="/login" component={LoginPage} />
         <Route path="/signup" component={SignupPage} />
-        <Route path="/academy" component={AcademyPage} />
+        <Route path="/gamedashboard" component={gameDashboard} />
 
     </Router>
 );
