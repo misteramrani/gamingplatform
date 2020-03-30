@@ -1,0 +1,45 @@
+.snake-container {
+  width: 100vw;
+  /* height: 100vh; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.grid {
+  width: 500px;
+  height: 500px;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  border: 1px solid black !important;
+  background-image: url("https://st4.depositphotos.com/1008317/20009/v/1600/depositphotos_200092618-stock-illustration-landscape-seamless-pattern-countryside-houses.jpg");
+  background-size: contain;
+}
+
+.gridItem {
+  /* outline: 1px solid #eee; */
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.is-food {
+  background-color: red;
+  transform: scale(.5);
+}
+
+.is-head {
+  background-color: blue;
+}
+
+.is-tail {
+  /* background-color: grey; */
+}
+
+.grid-message {
+  width: 100%;
+  text-align: center;
+}

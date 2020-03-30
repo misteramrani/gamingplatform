@@ -6,6 +6,7 @@ import { Route, BrowserRouter as Router } from 'react-router-dom';
  */
 import LoginPage from './components/loginpage/login';
 import gameDashboard from './components/gamedashboard/gamedashboard';
+import game from './components/gamepage/game';
 import SignupPage from './components/signuppage/signup';
 
 /**
@@ -19,6 +20,7 @@ export default (
         <Route path="/login" component={LoginPage} />
         <Route path="/signup" component={SignupPage} />
         <Route path="/gamedashboard" component={gameDashboard} />
+        <Route path="/game" component={game} />
 
     </Router>
 );

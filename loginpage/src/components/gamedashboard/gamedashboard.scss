@@ -9,8 +9,8 @@
 .dashboard {
   display: flex;
   &_hub {
-    min-width: 400px;
-    max-width: 400px;
+    min-width: 360px;
+    max-width: 360px;
     background-color: $base-color;
     &_logowrapper {
       text-align: right;
@@ -44,7 +44,7 @@
           margin: 0;
           font-weight: lighter;
           text-align: left;
-          font-size: 1.2rem;
+          font-size: 1rem;
         }
         &-score {
           margin: 0;
@@ -63,7 +63,7 @@
         }
       }
       &_search {
-        text-align: right;
+        text-align: left;
         margin: 0 2rem;
 
         &-searchfield {
@@ -86,11 +86,11 @@
       flex-wrap: wrap;
       &_game {
         margin: 2rem;
-        width: 400px;
+        width: 263px;
 
         &_thumb {
-          width: 396px;
-          height: 225px;
+          width: 263px;
+          height: 150px;
           border: 2px $base-color solid;
           background-color: $base-color;
 
@@ -104,13 +104,13 @@
         &_title {
           color: white;
           text-align: left;
-          font-size: 2rem;
+          font-size: 1.5rem;
           margin: 1rem 0 0 1rem;
         }
         &_score {
           color: rgb(126, 126, 126);
           text-align: left;
-          font-size: 1.6rem;
+          font-size: 1rem;
           margin-left: 1rem;
           & > span {
             color: $base-color;
