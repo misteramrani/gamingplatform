@@ -1,10 +1,18 @@
 .snake-container {
-  width: 100vw;
-  /* height: 100vh; */
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+}
+
+.grid-header {
+  margin: -20px 0 20px 0;
+}
+
+span {
+  color: #76b800;
+  font-size: 80px;
+  text-align: center;
 }
 
 .grid {
@@ -14,32 +22,108 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  border: 1px solid black !important;
-  background-image: url("https://st4.depositphotos.com/1008317/20009/v/1600/depositphotos_200092618-stock-illustration-landscape-seamless-pattern-countryside-houses.jpg");
-  background-size: contain;
+  background-image: url("../../assets/Map-2.jpg");
+  /* background-image: url("https://st4.depositphotos.com/1008317/20009/v/1600/depositphotos_200092618-stock-illustration-landscape-seamless-pattern-countryside-houses.jpg"); */
+  background-size: 100% 100%;
+  padding: 20px;
+  margin: -20px;
+}
+
+.grid-level2 {
+  width: 500px;
+  height: 500px;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background-image: url("../../assets/Map-3.jpg");
+  background-size: 100% 100%;
+  padding: 20px;
+  margin: -20px;
+}
+
+.grid-level3 {
+  width: 500px;
+  height: 500px;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background-image: url("../../assets/Map-1.jpg");
+  background-size: 100% 100%;
+  padding: 20px;
+  margin: -20px;
+}
+
+.grid-level4 {
+  width: 500px;
+  height: 500px;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background-image: url("../../assets/Map-4.jpg");
+  background-size: 100% 100%;
+  padding: 20px;
+  margin: -20px;
 }
 
 .gridItem {
-  /* outline: 1px solid #eee; */
   width: 20px;
   height: 20px;
-  border-radius: 50%;
 }
 
 .is-food {
-  background-color: red;
-  transform: scale(.5);
+  background-image: url("../../assets/Prey-1.png");
+  background-size: 100% 100%;
+  background-color: transparent;
+  padding: 5px;
+  margin: -5px;
 }
 
 .is-head {
-  background-color: blue;
+  background-color: transparent;
+  background-image: url("../../assets/Bird-2.png");
+  background-size: 100% 100%;
+  padding: 20px;
+  margin: -20px;
+}
+
+.is-head-up {
+  background-color: transparent;
+  background-image: url("../../assets/Bird-2.png");
+  background-size: 100% 100%;
+  padding: 20px;
+  margin: -20px;
+  transform: rotate(-90deg);
+}
+
+.is-head-left {
+  background-color: transparent;
+  background-image: url("../../assets/Bird-2.png");
+  background-size: 100% 100%;
+  padding: 20px;
+  margin: -20px;
+  transform: scale(-1, 1);
+}
+
+.is-head-down {
+  background-color: transparent;
+  background-image: url("../../assets/Bird-2.png");
+  background-size: 100% 100%;
+  padding: 20px;
+  margin: -20px;
+  transform: rotate(90deg);
 }
 
 .is-tail {
-  /* background-color: grey; */
+  background-color: transparent;
 }
 
 .grid-message {
-  width: 100%;
+  width: 110%;
   text-align: center;
+  background-size: 100% 100%;
+  background-image: url("../../assets/GameOver.jpg");
+  margin: -20px;
 }

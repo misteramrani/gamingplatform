@@ -5,7 +5,7 @@ import './tweety.css';
 class GameTweety extends React.Component {
 
     state = {
-        tickTime: 100,
+        tickTime: 130,
         rows: 25,
         cols: 25,
         grid: [],
@@ -40,7 +40,7 @@ class GameTweety extends React.Component {
         }
     }
 
-    resetGrid(state = {}, sendBack = false) {
+    updateGrid(state = {}, sendBack = false) {
 
         if (!Object.keys(state).length) {
             state = this.state;
@@ -59,6 +59,7 @@ class GameTweety extends React.Component {
                 const isFood = (food.row === row && food.col === col);
                 const isHead = (snake.head.row === row && snake.head.col === col);
                 let isTail = false;
+
                 snake.tail.forEach(t => {
                     if (t.row === row && t.col === col) {
                         isTail = true;
@@ -89,7 +90,8 @@ class GameTweety extends React.Component {
             let {
                 currentDirection,
                 snake,
-                food
+                food,
+                tickTime
             } = state;
             let {
                 tail
@@ -103,6 +105,11 @@ class GameTweety extends React.Component {
                 row,
                 col
             };
+
+            if (state.score === 50 ){
+console.log('fg');
+                tickTime = 200;
+            }
 
             // When game ove is shown, stop the tick
             if (state.die) {
@@ -121,6 +128,7 @@ class GameTweety extends React.Component {
             // Snake does potty, only when not eating
             if (head.row === state.food.row && head.col === state.food.col) {
                 food = this.getRandomGrid();
+                // iets met score doen
             } else {
                 tail.pop();
             }
@@ -148,6 +156,7 @@ class GameTweety extends React.Component {
             const newState = {
                 ...state,
                 food,
+                tickTime,
                 snake: {
                     head,
                     tail
@@ -164,7 +173,7 @@ class GameTweety extends React.Component {
                 die = true;
             }
 
-            const grid = this.resetGrid(newState, true);
+            const grid = this.updateGrid(newState, true);
             const score = newState.snake.tail.length * newState.scoreFactor;
 
             return {
@@ -172,6 +181,7 @@ class GameTweety extends React.Component {
                 die,
                 grid,
                 score,
+                // tickTime
             }
         });
 
@@ -205,7 +215,7 @@ class GameTweety extends React.Component {
             ...this.state,
             currentDirection,
         }
-        const grid = this.resetGrid(newState, true);
+        const grid = this.updateGrid(newState, true);
 
 
         this.setState(state => {
@@ -229,14 +239,14 @@ class GameTweety extends React.Component {
                     tail: state.snake.tail
                 }
             };
-            const grid = this.resetGrid(newState, true);
+            const grid = this.updateGrid(newState, true);
             return {
                 ...newState,
                 grid,
             }
         });
 
-        this.resetGrid();
+        // this.updateGrid();
 
         // Set tick
         window.fnInterval = setInterval(() => {
@@ -247,30 +257,56 @@ class GameTweety extends React.Component {
     componentWillUnmount() {
         document.body.removeEventListener('keydown', this.handleKeyPress);
         clearInterval(window.fnInterval);
+
     }
+
+    // const newArray;
+    // for (let i=0; i<grid.length; i++) {
+    //     let value = grid[i];
+    //     if (value !=== "bla") {
+    //         newArray = [];
+    //     }
+    //     // logica uitvoeren
+    // }
+
+    // function bla() {
+    //     return [];
+    // }
+    // () => {
+    //     return [];
+    // }
+    // const newArray = grid.map((value) => {
+    //     // logica uitvoeren
+    //     if (value !=="bla") {
+    //         return [];
+    //     }
+    // })
 
     render() {
         let gridContent = this.state.grid.map((grid) => {
             return <div
                 key={grid.row.toString() + '-' + grid.col.toString()}
                 className={
-                    grid.isHead
-                        ? 'gridItem is-head' : grid.isTail
-                            ? 'gridItem is-tail' : grid.isFood
-                                ? 'gridItem is-food' : 'gridItem'
+                    grid.isHead && this.state.currentDirection==='right'
+                        ? 'gridItem is-head' : grid.isHead && this.state.currentDirection === 'up'
+                            ? 'gridItem is-head-up' : grid.isHead && this.state.currentDirection === 'down'
+                                ? 'gridItem is-head-down' : grid.isHead && this.state.currentDirection === 'left'
+                                    ? 'gridItem is-head-left' : grid.isTail
+                                        ? 'gridItem is-tail' : grid.isFood
+                                            ? 'gridItem is-food' : 'gridItem'
                 }></div>
         });
         if (this.state.die) {
             gridContent = <div className="grid-message">
-                <h1>Game Over</h1>
+                {/* <h1>Game Over</h1> */}
             </div>;
         };
         return (
             <div className="snake-container wrapper">
                 <div className="grid-header">
-                    <h1>Your score: {this.state.score}</h1>
+                    <h1>SCORE <span>{this.state.score}</span></h1>
                 </div>
-                <div className="grid">{gridContent}</div>
+                <div className={this.state.score >= 600 ? "grid-level4" : this.state.score >= 300 ? "grid-level3" : this.state.score >= 100 ? "grid-level2" : "grid"}>{gridContent}</div>
             </div>
         );
     }

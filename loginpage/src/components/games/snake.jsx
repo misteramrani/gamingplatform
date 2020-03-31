@@ -236,7 +236,7 @@ class GameSnake extends React.Component {
             }
         });
 
-        this.resetGrid();
+        // this.resetGrid();
 
         // Set tick
         window.fnInterval = setInterval(() => {

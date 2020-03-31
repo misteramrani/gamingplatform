@@ -7,6 +7,7 @@ import thumb_two from '../../assets/thumb_ttt.jpg';
 import thumb_three from '../../assets/thumb_tg.jpg';
 import thumb_four from '../../assets/thumb_snake.jpg';
 import thumb_five from '../../assets/thumb_flappygoat.jpg';
+import thumb_six from '../../assets/thumb_tweety.jpg';
 
 
 class gameDashboard extends React.Component {
@@ -73,12 +74,21 @@ class gameDashboard extends React.Component {
 
 {/* importing multiple images
 https://stackoverflow.com/questions/44607396/importing-multiple-files-in-react */}
-                        <a href='../game'><div className="dashboard_main_gameboard_game">
+                        <div className="dashboard_main_gameboard_game">
+
                             <div className="dashboard_main_gameboard_game_thumb">
                                 <img src={thumb_four} alt=""/>
                             </div>
                             <div className="dashboard_main_gameboard_game_title">Snake</div>
                             <div className="dashboard_main_gameboard_game_score">Your Top Score <span>377</span></div>
+                        </div>
+
+                        <a href='../game'><div className="dashboard_main_gameboard_game">
+                            <div className="dashboard_main_gameboard_game_thumb">
+                                <img src={thumb_six} alt="" />
+                            </div>
+                            <div className="dashboard_main_gameboard_game_title">Tweety</div>
+                            <div className="dashboard_main_gameboard_game_score">Your Top Score <span>860</span></div>
                         </div></a>
 
                         <div className="dashboard_main_gameboard_game">
