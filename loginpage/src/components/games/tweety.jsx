@@ -84,6 +84,7 @@ class GameTweety extends React.Component {
             })
         }
     }
+    
 
     gameTick() {
         this.setState((state) => {
@@ -106,10 +107,45 @@ class GameTweety extends React.Component {
                 col
             };
 
-            if (state.score === 50 ){
-console.log('fg');
-                tickTime = 200;
+            if (state.score >= 10 ){
+                tickTime = 130-(state.score/2);
+                //dit in aparte functiezetten
+                clearInterval(window.fnInterval)
+                window.fnInterval = setInterval(() => {
+                    this.gameTick();
+                }, tickTime);}
+
+            if (state.score >= 100) {
+                tickTime = 100 - (state.score / 6);
+                //dit in aparte functiezetten
+                clearInterval(window.fnInterval)
+                window.fnInterval = setInterval(() => {
+                    this.gameTick();
+                }, tickTime);
             }
+
+            if (state.score >= 300) {
+                tickTime = 120 - (state.score / 5);
+                //dit in aparte functiezetten
+                clearInterval(window.fnInterval)
+                window.fnInterval = setInterval(() => {
+                    this.gameTick();
+                }, tickTime);
+            }
+
+                //check gamestates// Hiermee kan je wat je hierboven hebt herschrijven en bepalen wanneer gameover, wanneer tussen levels en tussendoor een tussenlevelscreen gaan renderen
+//                 var game_state = {
+//                     "START": 1,
+//                     "PAUSE": 2,
+//                     "GAME_OVER": 3
+//                 }
+//                 var current_state
+
+//                 switch (current_state) {
+//                     case START: this.gameTick(); break;
+//                     case GAME_OVER: this.score(); break;
+//               ...}
+
 
             // When game ove is shown, stop the tick
             if (state.die) {
@@ -117,7 +153,6 @@ console.log('fg');
             }
 
             // Snake eats
-
             // setstate score+10
 
             tail.unshift({
@@ -181,7 +216,6 @@ console.log('fg');
                 die,
                 grid,
                 score,
-                // tickTime
             }
         });
 
