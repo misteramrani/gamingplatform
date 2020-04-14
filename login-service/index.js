@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const sqlite3 = require('sqlite3').verbose()
-const db = new sqlite3.Database('../Database/users.db')
+const db = new sqlite3.Database('../Database/mvidia_database.db')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 
@@ -47,6 +47,24 @@ app.post('/signup', (request, response) => {
             console.log('200')
         }
 
+    });
+})
+
+app.get('/gamedashboard', function (req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+
+    // var allgames = [];
+
+    // var gamedata = {
+    //  username: 
+    //  gametitle:
+    //  gamethumb:
+    //  gamecomponent
+    // }
+
+    db.all('SELECT * FROM games', (error, results) => {
+        console.log(results)
+        res.json(results);
     });
 })
 

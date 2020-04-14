@@ -11,6 +11,21 @@ import thumb_six from '../../assets/thumb_tweety.jpg';
 
 
 class gameDashboard extends React.Component {
+
+    componentDidMount() {
+        fetch("http://localhost:8000/gamedashboard",
+            {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'
+                },
+            })
+            .then(async response => {
+                var gamedata = await response.json();
+                console.log(gamedata[0]);
+            })
+    }
     render() {
 
         // - landingpage
@@ -74,6 +89,10 @@ class gameDashboard extends React.Component {
 
 {/* importing multiple images
 https://stackoverflow.com/questions/44607396/importing-multiple-files-in-react */}
+
+{/* Hier loopen ipv repeated code */}
+{/* https://medium.com/javascript-in-plain-english/how-to-loop-through-arrays-in-react-3eaa8a14445 */}
+
                         <div className="dashboard_main_gameboard_game">
 
                             <div className="dashboard_main_gameboard_game_thumb">
