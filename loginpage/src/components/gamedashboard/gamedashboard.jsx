@@ -1,16 +1,24 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './gamedashboard.scss';
 import logo from '../../assets/mvidia-playground-white.png';
 import banner from '../../assets/ac_banner.jpg';
-import thumb_one from '../../assets/thumb_sing.jpg';
-import thumb_two from '../../assets/thumb_ttt.jpg';
-import thumb_three from '../../assets/thumb_tg.jpg';
-import thumb_four from '../../assets/thumb_snake.jpg';
-import thumb_five from '../../assets/thumb_flappygoat.jpg';
-import thumb_six from '../../assets/thumb_tweety.jpg';
+// import thumb_one from '../../assets/thumb_sing.jpg';
+// import thumb_two from '../../assets/thumb_ttt.jpg';
+// import thumb_three from '../../assets/thumb_tg.jpg';
+// import thumb_four from '../../assets/thumb_snake.jpg';
+// import thumb_five from '../../assets/thumb_flappygoat.jpg';
+// import thumb_six from '../../assets/thumb_tweety.jpg';
 
 
 class gameDashboard extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            games: [{}]
+        };
+    }
 
     componentDidMount() {
         fetch("http://localhost:8000/gamedashboard",
@@ -23,8 +31,38 @@ class gameDashboard extends React.Component {
             })
             .then(async response => {
                 var gamedata = await response.json();
-                console.log(gamedata[0]);
+                this.setState({ games: gamedata });
             })
+    }
+
+    renderGames() {
+        // let games = [];
+
+        // for(let i=0; i<this.state.games.length; i++) {
+        //     const game = this.state.games[i]
+        //     games.push(<li key={game.title}>{game.game_id}</li>)
+        // }
+        const games = this.state.games.map((game) => 
+            <Link
+                to = {{
+                    pathname: "../game"
+                    , 
+                    state: game // your data array of objects
+                }} 
+            >
+            <div className="dashboard_main_gameboard_game">
+
+                <div className="dashboard_main_gameboard_game_thumb">
+                    <img src={game.thumbnail} alt="" />
+                </div>
+                    <div className="dashboard_main_gameboard_game_title">{game.title}</div>
+                <div className="dashboard_main_gameboard_game_score">Your Top Score <span>377</span></div>
+                    </div>
+            </ Link>
+        );
+        console.log(this.state.games);
+
+        return <div className="dashboard_main_gameboard">{games}</div>
     }
     render() {
 
@@ -36,6 +74,7 @@ class gameDashboard extends React.Component {
         return (
             <div className="dashboard">
                 <aside className="dashboard_hub">
+                    
                     <div className="dashboard_hub_logowrapper">
 
                         <img className="dashboard_hub_logowrapper-logo" src={logo} alt="" />
@@ -85,18 +124,20 @@ class gameDashboard extends React.Component {
                             <input className="dashboard_main_header_search-searchfield" type="text" name="search_field" id="" />
                         </div>
                     </div>
-                    <div className="dashboard_main_gameboard">
+                    {/* <div className="dashboard_main_gameboard"> */}
 
-{/* importing multiple images
+                        {/* importing multiple images
 https://stackoverflow.com/questions/44607396/importing-multiple-files-in-react */}
 
-{/* Hier loopen ipv repeated code */}
-{/* https://medium.com/javascript-in-plain-english/how-to-loop-through-arrays-in-react-3eaa8a14445 */}
+                        {/* Hier loopen ipv repeated code */}
+                        {/* https://medium.com/javascript-in-plain-english/how-to-loop-through-arrays-in-react-3eaa8a14445 */}
 
+                        {this.renderGames()}
+{/* 
                         <div className="dashboard_main_gameboard_game">
 
                             <div className="dashboard_main_gameboard_game_thumb">
-                                <img src={thumb_four} alt=""/>
+                                <img src={thumb_four} alt="" />
                             </div>
                             <div className="dashboard_main_gameboard_game_title">Snake</div>
                             <div className="dashboard_main_gameboard_game_score">Your Top Score <span>377</span></div>
@@ -140,9 +181,9 @@ https://stackoverflow.com/questions/44607396/importing-multiple-files-in-react *
                             </div>
                             <div className="dashboard_main_gameboard_game_title">Let's Sing Like Kim Sing</div>
                             <div className="dashboard_main_gameboard_game_score">Your Top Score <span>3567</span></div>
-                        </div>
+                        </div> */}
 
-                    </div>
+                    {/* </div> */}
                 </main>
 
             </div >

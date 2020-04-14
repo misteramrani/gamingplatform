@@ -3,16 +3,32 @@ import './game.scss'
 import logo from '../../assets/mvidia-playground-white.png';
 import goback from '../../assets/goback.png';
 // import GameSnake from '../games/snake';
-import GameTweety from '../games/tweety';
+// import GameTweety from '../games/tweety';
 import ReactDOM from 'react-dom'
 
 
 class game extends React.Component {
+    
+    constructor(props) {
+        super(props);
 
+        console.log(this.props.location.state)
+        this.state = {}
+    
 
+        console.log(this.state)
+    }
+
+    function() {
+        this.setState({
+            gameTitle: this.props.location.state.title,
+    gameDesc: this.props.location.state.description,
+    gameLink: this.props.location.state.game_link
+    })}
 
     componentDidMount() {
         this.focusDiv();
+        this.function();
     }
     
     focusDiv() {
@@ -23,11 +39,7 @@ class game extends React.Component {
         e.preventDefault();
     }
 
-    
-
-
     render() {
-
 
         // template / dynamic page voor game - pages
         //     - thumb, desc, title, score ? difficulty ?, scoreboard user en algemeen
@@ -41,7 +53,7 @@ class game extends React.Component {
                         <div className="game_header_logo"><img src={logo} alt=""/></div>
 
                         <div className="game_header_title">
-                            <h1>game title</h1></div>
+                            <h1>{this.state.gameTitle}</h1></div>
                         <a href="./gamedashboard">
                             <div className="game_header_goback">
                                 <img src={goback} alt="" />
@@ -50,10 +62,10 @@ class game extends React.Component {
                         </a>
                     </div>
                     <div className="game_main">
-                        <div className="game_main_description"><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p></div>
+                        <div className="game_main_description"><p>{this.state.gameDesc}</p></div>
                         {/* <div className="game_main_game">placeholder game</div> */}
-                        <GameTweety />
-                        {/* <GameSnake /> */}
+
+                        {this.state.gameLink}
 
                     </div>
                     <div className="game_footer">
