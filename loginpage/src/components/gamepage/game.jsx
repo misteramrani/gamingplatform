@@ -1,10 +1,10 @@
-import React from 'react';
+import React , {Suspense} from 'react';
 import './game.scss'
 import logo from '../../assets/mvidia-playground-white.png';
 import goback from '../../assets/goback.png';
-import GameSnake from '../games/snake';
-import GameTweety from '../games/tweety';
-import GameComingSoon from '../games/comingsoon';
+// import GameSnake from '../games/snake';
+// import GameTweety from '../games/tweety';
+// import GameComingSoon from '../games/comingsoon';
 import ReactDOM from 'react-dom'
 import '../games/snake.jsx'
 
@@ -27,45 +27,36 @@ class game extends React.Component {
         console.log(this.state)
     }
 
-    // getComponent() {
-    //     console.log(this.state.gameName)
-    //     let component;
-    //     switch (this.state.gameName) {
-    //         case 'GameSnake':
-    //             component = <GameSnake />;
-    //             break;
-    //         case 'GameTweety':
-    //             component = <GameTweety />;
-    //             break;
-    //         case 'GameTG':
-    //             component = <GameComingSoon />;
-    //             break;
-    //         case 'GameTicTacToe':
-    //             component = <GameComingSoon />;
-    //             break;
-    //         case 'GameSing':
-    //             component = <GameComingSoon />;
-    //             break;
-    //         case 'GameFlappyGoat':
-    //             component = <GameComingSoon />;
-    //             break;
-    //         default:
-    //             break;
-    //     }
-    //     return component;
-    // }
+    getComponent(){
 
-    // function2() {
-    //     const TestComponent = Components[this.state.gameLink];
-    //     return React.createElement(TestComponent, {})
+        let component;
+            const Component = React.lazy(() => import('../games/' + this.state.gameName));
+            component = <Suspense fallback={<div>Loading...</div>}><Component /></Suspense>;
+        // switch (this.state.gameName) {
 
-    //     switch(this.state.gameLink) {
-    //         case "GameSnake": return  <GameSnake />
-    //         default: return <GameSnake />
-    //     }
-    //     console.log(this.state.gameLink)
-    //     // return <this.state.gameLink />
-    // }
+        //     case 'GameSnake':
+        //         component = <Suspense fallback={<div>Loading...</div>}><Component /></Suspense>;
+        //         break;
+        //     case 'GameTweety':
+        //         component = <GameTweety />;
+        //         break;
+        //     case 'GameTG':
+        //         component = <GameComingSoon />;
+        //         break;
+        //     case 'GameTicTacToe':
+        //         component = <GameComingSoon />;
+        //         break;
+        //     case 'GameSing':
+        //         component = <GameComingSoon />;
+        //         break;
+        //     case 'GameFlappyGoat':
+        //         component = <GameComingSoon />;
+        //         break;
+        //     default:
+        //         break;
+        // }
+        return component;
+    }
 
     componentDidMount() {
         this.focusDiv();
@@ -108,8 +99,8 @@ class game extends React.Component {
                         <div className="game_main_description"><p>{this.state.gameDesc}</p></div>
                         {/* <div className="game_main_game">placeholder game</div> */}
 
-                        {/* {this.getComponent()} */}
-                        <GameSnake />
+                        {this.getComponent()}
+                        {/* <GameSnake /> */}
                         {/* {this.function2()} */}
                         {/* {React.createElement(this.state.gameLink)} */}
 

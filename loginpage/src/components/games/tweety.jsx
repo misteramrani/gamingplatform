@@ -322,25 +322,25 @@ class GameTweety extends React.Component {
                 key={grid.row.toString() + '-' + grid.col.toString()}
                 className={
                     grid.isHead && this.state.currentDirection==='right'
-                        ? 'gridItem is-head' : grid.isHead && this.state.currentDirection === 'up'
-                            ? 'gridItem is-head-up' : grid.isHead && this.state.currentDirection === 'down'
-                                ? 'gridItem is-head-down' : grid.isHead && this.state.currentDirection === 'left'
-                                    ? 'gridItem is-head-left' : grid.isTail
-                                        ? 'gridItem is-tail' : grid.isFood
-                                            ? 'gridItem is-food' : 'gridItem'
+                        ? 'birdy birdyshead' : grid.isHead && this.state.currentDirection === 'up'
+                            ? 'birdy birdyshead-up' : grid.isHead && this.state.currentDirection === 'down'
+                                ? 'birdy birdyshead-down' : grid.isHead && this.state.currentDirection === 'left'
+                                    ? 'birdy birdyshead-left' : grid.isTail
+                                        ? 'birdy birdysinvisibletail' : grid.isFood
+                                            ? 'birdy prey' : 'birdy'
                 }></div>
         });
         if (this.state.die) {
-            gridContent = <div className="grid-message">
+            gridContent = <div className="tweety-message">
                 {/* <h1>Game Over</h1> */}
             </div>;
         };
         return (
-            <div className="snake-container wrapper">
-                <div className="grid-header">
+            <div className="tweety-container wrapper">
+                <div className="tweety-header">
                     <h1>SCORE <span>{this.state.score}</span></h1>
                 </div>
-                <div className={this.state.score >= 600 ? "grid-level4" : this.state.score >= 300 ? "grid-level3" : this.state.score >= 100 ? "grid-level2" : "grid"}>{gridContent}</div>
+                <div className={this.state.score >= 600 ? "tweety-level4" : this.state.score >= 300 ? "tweety-level3" : this.state.score >= 100 ? "tweety-level2" : "tweety"}>{gridContent}</div>
             </div>
         );
     }

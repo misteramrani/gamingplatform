@@ -21,6 +21,7 @@ class gameDashboard extends React.Component {
         };
     }
 
+
     componentDidMount() {
         fetch("http://localhost:8000/gamedashboard",
             {
@@ -34,6 +35,16 @@ class gameDashboard extends React.Component {
                 var gamedata = await response.json();
                 this.setState({ games: gamedata });
             })
+        .then(async importThumbnail => {
+            let linksToThumbnail = [];
+
+            for (let i = 0; i < this.state.games.length; i++) {
+                linksToThumbnail.push(this.state.games[i].thumbnail)
+
+                React.lazy(() => import(linksToThumbnail[i].thumbnail));
+
+            }});
+
     }
 
     renderGames() {
@@ -43,7 +54,10 @@ class gameDashboard extends React.Component {
         //     const game = this.state.games[i]
         //     games.push(<li key={game.title}>{game.game_id}</li>)
         // }
+
         const games = this.state.games.map((game) => 
+
+
             <Link
                 to = {{
                     pathname: "../game"
@@ -51,6 +65,7 @@ class gameDashboard extends React.Component {
                     state: game // your data array of objects
                 }} 
             >
+                
             <div className="dashboard_main_gameboard_game">
 
                 <div className="dashboard_main_gameboard_game_thumb">
@@ -62,7 +77,6 @@ class gameDashboard extends React.Component {
             </ Link>
         );
         console.log(this.state.games);
-
         return <div className="dashboard_main_gameboard">{games}</div>
     }
     render() {
@@ -125,12 +139,6 @@ class gameDashboard extends React.Component {
                             <input className="dashboard_main_header_search-searchfield" type="text" name="search_field" id="" />
                         </div>
                     </div>
-
-                        {/* importing multiple images
-https://stackoverflow.com/questions/44607396/importing-multiple-files-in-react */}
-
-                        {/* Hier loopen ipv repeated code */}
-                        {/* https://medium.com/javascript-in-plain-english/how-to-loop-through-arrays-in-react-3eaa8a14445 */}
 
                         {this.renderGames()}
 
