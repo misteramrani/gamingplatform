@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import './gamedashboard.scss';
 import logo from '../../assets/mvidia-playground-white.png';
 import banner from '../../assets/ac_banner.jpg';
-// import thumb_one from '../../assets/thumb_sing.jpg';
+
+// import thumb_sing from '../../assets/thumb_sing.jpg';
 // import thumb_two from '../../assets/thumb_ttt.jpg';
 // import thumb_three from '../../assets/thumb_tg.jpg';
-// import thumb_four from '../../assets/thumb_snake.jpg';
+// import { thumb_snake.jpg } from '../../assets/thumb_snake.jpg';
 // import thumb_five from '../../assets/thumb_flappygoat.jpg';
 // import thumb_six from '../../assets/thumb_tweety.jpg';
 
@@ -53,7 +54,7 @@ class gameDashboard extends React.Component {
             <div className="dashboard_main_gameboard_game">
 
                 <div className="dashboard_main_gameboard_game_thumb">
-                    <img src={game.thumbnail} alt="" />
+                        <img src={game.thumbnail} alt="" />
                 </div>
                     <div className="dashboard_main_gameboard_game_title">{game.title}</div>
                 <div className="dashboard_main_gameboard_game_score">Your Top Score <span>377</span></div>
@@ -124,7 +125,6 @@ class gameDashboard extends React.Component {
                             <input className="dashboard_main_header_search-searchfield" type="text" name="search_field" id="" />
                         </div>
                     </div>
-                    {/* <div className="dashboard_main_gameboard"> */}
 
                         {/* importing multiple images
 https://stackoverflow.com/questions/44607396/importing-multiple-files-in-react */}
@@ -133,59 +133,8 @@ https://stackoverflow.com/questions/44607396/importing-multiple-files-in-react *
                         {/* https://medium.com/javascript-in-plain-english/how-to-loop-through-arrays-in-react-3eaa8a14445 */}
 
                         {this.renderGames()}
-{/* 
-                        <div className="dashboard_main_gameboard_game">
 
-                            <div className="dashboard_main_gameboard_game_thumb">
-                                <img src={thumb_four} alt="" />
-                            </div>
-                            <div className="dashboard_main_gameboard_game_title">Snake</div>
-                            <div className="dashboard_main_gameboard_game_score">Your Top Score <span>377</span></div>
-                        </div>
-
-                        <a href='../game'><div className="dashboard_main_gameboard_game">
-                            <div className="dashboard_main_gameboard_game_thumb">
-                                <img src={thumb_six} alt="" />
-                            </div>
-                            <div className="dashboard_main_gameboard_game_title">Tweety</div>
-                            <div className="dashboard_main_gameboard_game_score">Your Top Score <span>860</span></div>
-                        </div></a>
-
-                        <div className="dashboard_main_gameboard_game">
-                            <div className="dashboard_main_gameboard_game_thumb">
-                                <img src={thumb_two} alt="" />
-                            </div>
-                            <div className="dashboard_main_gameboard_game_title">Tic Tac Toe</div>
-                            <div className="dashboard_main_gameboard_game_score">Your Top Score <span>1200</span></div>
-                        </div>
-
-                        <div className="dashboard_main_gameboard_game">
-                            <div className="dashboard_main_gameboard_game_thumb">
-                                <img src={thumb_three} alt="" />
-                            </div>
-                            <div className="dashboard_main_gameboard_game_title">TG - The Rise Of The Donkeys</div>
-                            <div className="dashboard_main_gameboard_game_score">Your Top Score <span>14356</span></div>
-                        </div>
-
-                        <div className="dashboard_main_gameboard_game">
-                            <div className="dashboard_main_gameboard_game_thumb">
-                                <img src={thumb_five} alt="" />
-                            </div>
-                            <div className="dashboard_main_gameboard_game_title">Flappy Goat</div>
-                            <div className="dashboard_main_gameboard_game_score">Your Top Score <span>908</span></div>
-                        </div>
-
-                        <div className="dashboard_main_gameboard_game">
-                            <div className="dashboard_main_gameboard_game_thumb">
-                                <img src={thumb_one} alt="" />
-                            </div>
-                            <div className="dashboard_main_gameboard_game_title">Let's Sing Like Kim Sing</div>
-                            <div className="dashboard_main_gameboard_game_score">Your Top Score <span>3567</span></div>
-                        </div> */}
-
-                    {/* </div> */}
                 </main>
-
             </div >
         )
 
