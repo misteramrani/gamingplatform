@@ -17,34 +17,50 @@ class gameDashboard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            games: [{}]
+            games: [{}],
+            images: {}
         };
     }
 
 
-    componentDidMount() {
+    componentWillMount() {
         fetch("http://localhost:8000/gamedashboard",
-            {
-                method: "GET",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
-                },
+        {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+            },
+        })
+        .then(async response => {
+            var gamedata = await response.json();
+            this.setState({ games: gamedata });
+        })
+        .then(importThumbnail => {
+            // let linksToThumbnail = [];
+            const imagesList = this.importAll(require.context('../../assets', false, /\.(png|jpe?g|svg)$/));
+            
+            this.setState({
+                images: imagesList
             })
-            .then(async response => {
-                var gamedata = await response.json();
-                this.setState({ games: gamedata });
-            })
-        .then(async importThumbnail => {
-            let linksToThumbnail = [];
+            // console.log(this.state.images);
+            // for (let i = 0; i < this.state.games.length; i++) {
+            //     import(this.state.games[i].thumbnail).then(image => {
+            //         // linksToThumbnail.push(this.state.games[i].thumbnail)
+            //         console.log(image);
+            //     });
 
-            for (let i = 0; i < this.state.games.length; i++) {
-                linksToThumbnail.push(this.state.games[i].thumbnail)
+            // }
+        });
+    }
 
-                React.lazy(() => import(linksToThumbnail[i].thumbnail));
-
-            }});
-
+    importAll(r) {
+        let images = {};
+        r.keys().map((item, index) => { 
+            console.log(typeof item);
+            images[item.replace('./', '')] = r(item); 
+        });
+        return images;
     }
 
     renderGames() {
@@ -54,26 +70,28 @@ class gameDashboard extends React.Component {
         //     const game = this.state.games[i]
         //     games.push(<li key={game.title}>{game.game_id}</li>)
         // }
-
-        const games = this.state.games.map((game) => 
+        // console.log(this.state.images["GameOver.jpg"]);
+        // const image = require('../../assets/thumb_snake.jpg')
+        // console.log(this.state.images["GameOver.jpg"]);
+        const games = this.state.games.map((game) =>
 
 
             <Link
-                to = {{
+                to={{
                     pathname: "../game"
-                    , 
+                    ,
                     state: game // your data array of objects
-                }} 
+                }}
             >
-                
-            <div className="dashboard_main_gameboard_game">
 
-                <div className="dashboard_main_gameboard_game_thumb">
-                        <img src={game.thumbnail} alt="" />
-                </div>
-                    <div className="dashboard_main_gameboard_game_title">{game.title}</div>
-                <div className="dashboard_main_gameboard_game_score">Your Top Score <span>377</span></div>
+                <div className="dashboard_main_gameboard_game">
+
+                    <div className="dashboard_main_gameboard_game_thumb">
+                        <img src={this.state.images[game.thumbnail]} alt="" />
                     </div>
+                    <div className="dashboard_main_gameboard_game_title">{game.title}</div>
+                    <div className="dashboard_main_gameboard_game_score">Your Top Score <span>377</span></div>
+                </div>
             </ Link>
         );
         console.log(this.state.games);
@@ -89,7 +107,7 @@ class gameDashboard extends React.Component {
         return (
             <div className="dashboard">
                 <aside className="dashboard_hub">
-                    
+
                     <div className="dashboard_hub_logowrapper">
 
                         <img className="dashboard_hub_logowrapper-logo" src={logo} alt="" />
@@ -140,7 +158,7 @@ class gameDashboard extends React.Component {
                         </div>
                     </div>
 
-                        {this.renderGames()}
+                    {this.renderGames()}
 
                 </main>
             </div >
