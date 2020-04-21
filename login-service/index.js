@@ -62,14 +62,22 @@ app.post('/snake', function (req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
 
     var gamePlayer = req.body.user;
-    var game = req.body.game + "_score";
+    var scoreOfGame = req.body.game + "_score";
     var score = req.body.score;
-    console.log(game)
+    console.log(scoreOfGame)
 
-    // db.all('INSERT INTO users (email, password) VALUES (?,?);', [email, password], (error, results) => {
-    //     var doesemailexist = db.all('SELECT * FROM users WHERE email = ($email)');
+    db.all('INSERT INTO users (email, password) VALUES (?,?);', [email, password], (error, results) => {
+        var doesemailexist = db.all('SELECT * FROM users WHERE email = ($email)');
 
-    // })
+
+
+        'SELECT scoreOfGame FROM users WHERE email = ($gamePlayer)'
+        // als score hoger is dan wat in DB staat of als dbscore is null, dan update. Als gelijk of lager, dan niets doen
+
+        // als game niet in database, dan aanmaken (of zet zelf de keys in database) 
+        'ALTER TABLE`table` ADD INDEX`product_id`(`product_id`)'
+
+    })
 })
 
 
