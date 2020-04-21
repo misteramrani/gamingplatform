@@ -46,27 +46,32 @@ app.post('/signup', (request, response) => {
             response.sendStatus(200)
             console.log('200')
         }
-
     });
 })
 
 app.get('/gamedashboard', function (req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
 
-    // var allgames = [];
-
-    // var gamedata = {
-    //  username: 
-    //  gametitle:
-    //  gamethumb:
-    //  gamecomponent
-    // }
-
     db.all('SELECT * FROM games', (error, results) => {
         console.log(results)
         res.json(results);
     });
 })
+
+app.post('/snake', function (req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+
+    var gamePlayer = req.body.user;
+    var game = req.body.game + "_score";
+    var score = req.body.score;
+    console.log(game)
+
+    // db.all('INSERT INTO users (email, password) VALUES (?,?);', [email, password], (error, results) => {
+    //     var doesemailexist = db.all('SELECT * FROM users WHERE email = ($email)');
+
+    // })
+})
+
 
 
 app.listen(8000, () => console.log(`Listening on port 8000`))

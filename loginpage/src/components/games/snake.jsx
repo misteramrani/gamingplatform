@@ -107,6 +107,25 @@ class GameSnake extends React.Component {
             // When game ove is shown, stop the tick
             if (state.die) {
                 clearInterval(window.fnInterval);
+                console.log(this.state.score)
+
+                fetch("http://localhost:8000/snake",
+                    {
+                        method: "POST",
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Access-Control-Allow-Origin': '*'
+                        },
+                        body: JSON.stringify({ user: this.props.user, score:this.state.score, game:"Snake"})
+                    })
+                    .then(response => {
+                        if (response.status === 200) {
+                            console.log("a")
+
+                        } else if (response.status === 403) {
+                            console.log("a")
+                        }
+                    })
             }
 
             // Snake eats

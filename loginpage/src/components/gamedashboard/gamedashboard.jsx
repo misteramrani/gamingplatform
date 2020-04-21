@@ -18,7 +18,8 @@ class gameDashboard extends React.Component {
         super(props);
         this.state = {
             games: [{}],
-            images: {}
+            images: {},
+            currentUser: this.props.location.state.user
         };
     }
 
@@ -37,27 +38,19 @@ class gameDashboard extends React.Component {
             this.setState({ games: gamedata });
         })
         .then(importThumbnail => {
-            // let linksToThumbnail = [];
             const imagesList = this.importAll(require.context('../../assets', false, /\.(png|jpe?g|svg)$/));
             
             this.setState({
-                images: imagesList
+                images: imagesList,
             })
-            // console.log(this.state.images);
-            // for (let i = 0; i < this.state.games.length; i++) {
-            //     import(this.state.games[i].thumbnail).then(image => {
-            //         // linksToThumbnail.push(this.state.games[i].thumbnail)
-            //         console.log(image);
-            //     });
-
-            // }
         });
+
+        console.log(this.props);
     }
 
     importAll(r) {
         let images = {};
         r.keys().map((item, index) => { 
-            console.log(typeof item);
             images[item.replace('./', '')] = r(item); 
         });
         return images;
@@ -78,9 +71,9 @@ class gameDashboard extends React.Component {
 
             <Link
                 to={{
-                    pathname: "../game"
-                    ,
-                    state: game // your data array of objects
+                    pathname: "../game",                    
+                    state: game,
+                    param: this.state.currentUser
                 }}
             >
 
@@ -94,14 +87,12 @@ class gameDashboard extends React.Component {
                 </div>
             </ Link>
         );
-        console.log(this.state.games);
         return <div className="dashboard_main_gameboard">{games}</div>
     }
     render() {
 
         // - landingpage
         //     - header: scores, naam, avatar (of side, net als My Dell)
-        //     - main: met thumbnails etc met games(ook soon coming)
         //     - socials latest
 
         return (
@@ -116,7 +107,7 @@ class gameDashboard extends React.Component {
                     <div className="dashboard_hub_profile">
                         <h1 className="dashboard_hub_profile-welcome">WELCOME BACK</h1>
                         {/* onclick dropdown met logout! */}
-                        <h1 className="dashboard_hub_profile-username">Amrani</h1>
+                        <h1 className="dashboard_hub_profile-username">{this.state.currentUser}</h1>
 
                     </div>
                     <div className="dashboard_hub_stats">

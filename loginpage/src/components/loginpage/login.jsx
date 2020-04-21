@@ -59,7 +59,8 @@ class LoginForm extends React.Component {
             })
             .then(response => {
                 if (response.status === 200) {
-                    this.props.history.push('/gamedashboard');
+                    this.props.history.push('/gamedashboard', 
+                    {user: this.state.email});
 
                 } else if (response.status === 403) {
                     this.showError()

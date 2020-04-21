@@ -2,17 +2,12 @@ import React , {Suspense} from 'react';
 import './game.scss'
 import logo from '../../assets/mvidia-playground-white.png';
 import goback from '../../assets/goback.png';
-// import GameSnake from '../games/snake';
-// import GameTweety from '../games/tweety';
-// import GameComingSoon from '../games/comingsoon';
 import ReactDOM from 'react-dom'
 import '../games/snake.jsx'
 
 
 class game extends React.Component {
-    // const Map = {
-    //     "GameSnake": GameSnake
-    // }
+
     constructor(props) {
         super(props);
 
@@ -20,18 +15,22 @@ class game extends React.Component {
         this.state = {
             gameTitle: this.props.location.state.title,
             gameDesc: this.props.location.state.description,
-            gameName: this.props.location.state.game_name
+            gameName: this.props.location.state.game_name,
+            currentUser: this.props.location.param
+
         }
 
 
         console.log(this.state)
+        console.log(this.state.currentUser)
+
     }
 
     getComponent(){
 
         let component;
             const Component = React.lazy(() => import('../games/' + this.state.gameName));
-            component = <Suspense fallback={<div>Loading...</div>}><Component /></Suspense>;
+            component = <Suspense fallback={<div>Loading...</div>}><Component user={this.state.currentUser} /></Suspense>;
         // switch (this.state.gameName) {
 
         //     case 'GameSnake':
